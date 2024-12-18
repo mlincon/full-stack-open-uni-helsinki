@@ -2,6 +2,20 @@ import { useState } from "react";
 
 const totalFunc = (items) => items.reduce((i, j) => i + j, 0);
 
+const Button = (props) => {
+  const { text, handler } = props;
+  return <button onClick={handler}>{text}</button>;
+};
+
+const StatisticLine = (props) => {
+  const { text, value } = props;
+  return (
+    <p>
+      {text} {value}
+    </p>
+  );
+};
+
 const Statistics = (props) => {
   const { good, neutral, bad } = props;
   let goodScore = 1;
@@ -15,17 +29,17 @@ const Statistics = (props) => {
 
   let average =
     (good * goodScore + neutral * neutralScore + bad * badScore) / total;
-  let percentage = 100 * (good / total);
+  let percentage = String(100 * (good / total)) + "%";
 
   return (
     <>
       <h1>statistics</h1>
-      <p>good {good}</p>
-      <p>neutral {neutral}</p>
-      <p>bad {bad}</p>
-      <p>all {total}</p>
-      <p>average {average}</p>
-      <p>positive {percentage} %</p>
+      <StatisticLine text="good" value={good} />
+      <StatisticLine text="neutral" value={neutral} />
+      <StatisticLine text="bad" value={bad} />
+      <StatisticLine text="all" value={total} />
+      <StatisticLine text="average" value={average} />
+      <StatisticLine text="positive" value={percentage} />
     </>
   );
 };
@@ -43,9 +57,9 @@ const App = () => {
   return (
     <div>
       <h1>give feedback</h1>
-      <button onClick={handleGoodClick}>good</button>
-      <button onClick={handleNeutralClick}>neutral</button>
-      <button onClick={handleBadClick}>bad</button>
+      <Button text="good" handler={handleGoodClick} />
+      <Button text="neutral" handler={handleNeutralClick} />
+      <Button text="bad" handler={handleBadClick} />
 
       <Statistics good={good} neutral={neutral} bad={bad} />
     </div>
