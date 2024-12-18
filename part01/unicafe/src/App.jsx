@@ -9,13 +9,13 @@ const Statistics = (props) => {
   let badScore = -1;
 
   let total = totalFunc([good, neutral, bad]);
-  let average = 0;
-  let percentage = 0;
-  if (total !== 0) {
-    average =
-      (good * goodScore + neutral * neutralScore + bad * badScore) / total;
-    percentage = 100 * (good / total);
+  if (total === 0) {
+    return <p>No feedbacks given</p>;
   }
+
+  let average =
+    (good * goodScore + neutral * neutralScore + bad * badScore) / total;
+  let percentage = 100 * (good / total);
 
   return (
     <>
@@ -23,7 +23,7 @@ const Statistics = (props) => {
       <p>good {good}</p>
       <p>neutral {neutral}</p>
       <p>bad {bad}</p>
-      <p>all {totalFunc([good, neutral, bad])}</p>
+      <p>all {total}</p>
       <p>average {average}</p>
       <p>positive {percentage} %</p>
     </>
