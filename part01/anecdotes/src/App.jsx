@@ -14,13 +14,26 @@ const App = () => {
     "The only way to go fast, is to go well.",
   ];
 
-  const [selected, setSelected] = useState(0);
+  const points = anecdotes.reduce((acc, item, index) => {
+    acc[index] = 0;
+    return acc;
+  }, {});
 
-  const handlerNextClick = () => setSelected(randomSelected(anecdotes.length))
+  const [selected, setSelected] = useState(0);
+  const [votes, setVotes] = useState(points);
+
+  const handlerNextClick = () => setSelected(randomSelected(anecdotes.length));
+  const handlerVoteClick = () => {
+    const copy = { ...votes };
+    copy[selected] += 1;
+    setVotes(copy);
+  };
 
   return (
     <div>
       <p>{anecdotes[selected]}</p>
+      <p>has {votes[selected]} votes</p>
+      <button onClick={handlerVoteClick}>vote</button>
       <button onClick={handlerNextClick}>next anecdote</button>
     </div>
   );
