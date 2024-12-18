@@ -1,8 +1,9 @@
 import { useState } from "react";
 
-const Total = ({ items }) => {
-  let totalSum = items.reduce((i, j) => i + j, 0);
-  return <p>all {totalSum}</p>;
+const totalFunc = (items) => items.reduce((i, j) => i + j, 0);
+
+const Total = ({ good, neutral, bad }) => {
+  return <p>all {totalFunc([good, neutral, bad])}</p>;
 };
 
 const Average = ({ good, neutral, bad }) => {
@@ -10,13 +11,23 @@ const Average = ({ good, neutral, bad }) => {
   let neutralScore = 0;
   let badScore = -1;
 
-  let total = good + neutral + bad;
+  let total = totalFunc([good, neutral, bad]);
   let average = 0;
   if (total !== 0) {
     average =
       (good * goodScore + neutral * neutralScore + bad * badScore) / total;
   }
   return <p>average {average}</p>;
+};
+
+const Positive = ({ good, neutral, bad }) => {
+  let total = totalFunc([good, neutral, bad]);
+  let percentage = 0;
+  if (total !== 0) {
+    percentage = 100 * (good / total);
+  }
+
+  return <p>positive {percentage} %</p>;
 };
 
 const App = () => {
@@ -40,8 +51,9 @@ const App = () => {
       <p>good {good}</p>
       <p>neutral {neutral}</p>
       <p>bad {bad}</p>
-      <Total items={[good, neutral, bad]} />
+      <Total good={good} neutral={neutral} bad={bad} />
       <Average good={good} neutral={neutral} bad={bad} />
+      <Positive good={good} neutral={neutral} bad={bad} />
     </div>
   );
 };
