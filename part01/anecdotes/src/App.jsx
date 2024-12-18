@@ -2,6 +2,16 @@ import { useState } from "react";
 
 const randomSelected = (max) => Math.floor(Math.random() * max);
 
+const getMaxVotes = (votes) => {
+  const maxKey = Object.entries(votes).reduce(
+    (acc, [key, value]) => {
+      return value > acc.value ? { key, value } : acc;
+    },
+    { key: 0, value: 0 }
+  );
+  return maxKey["key"];
+};
+
 const App = () => {
   const anecdotes = [
     "If it hurts, do it more often.",
@@ -21,20 +31,28 @@ const App = () => {
 
   const [selected, setSelected] = useState(0);
   const [votes, setVotes] = useState(points);
+  const [maxVotes, setMaxVotes] = useState(0);
 
   const handlerNextClick = () => setSelected(randomSelected(anecdotes.length));
   const handlerVoteClick = () => {
     const copy = { ...votes };
     copy[selected] += 1;
     setVotes(copy);
+
+    const mostVote = getMaxVotes(copy);
+    setMaxVotes(mostVote);
   };
 
   return (
     <div>
+      <h1>Anecdote of the day</h1>
       <p>{anecdotes[selected]}</p>
       <p>has {votes[selected]} votes</p>
       <button onClick={handlerVoteClick}>vote</button>
       <button onClick={handlerNextClick}>next anecdote</button>
+
+      <h1>Anecdote with most votes</h1>
+      <p>{anecdotes[maxVotes]}</p>
     </div>
   );
 };
