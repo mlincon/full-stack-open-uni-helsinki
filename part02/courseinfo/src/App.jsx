@@ -2,11 +2,10 @@ const Header = ({ name }) => {
   return <h1>{name}</h1>;
 };
 
-
 const Parts = ({ parts }) => {
-  return parts.map((part, index) => {
+  return parts.map((part) => {
     return (
-      <p>
+      <p key={part.id}>
         {part.name}: {part.exercises}
       </p>
     );
