@@ -11,8 +11,8 @@ npm run dev
 
 # contents
 
-| part | topics |
-|------|--------|
-| 0    |        |
-| 1    |        |
-| 2    | <ul><li>rending a collection, modules</li> <li>forms</li> <li>getting data from server</li> <li>altering data in server</li> <li>adding styles to react apps</li> </ul> |
+| part | topics                                                                                                                                                                   |
+| ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 0    | <ul> <li>general info</li> <li>fundamentals of web apps</li> </ul>                                                                                                       |
+| 1    | <ul> <li>introduction to react</li> <li>javascript</li> <li>component state, event handlers</li> <li>a more complex state, debugging</li> </ul>                          |
+| 2    | <ul> <li>rending a collection, modules</li> <li>forms</li> <li>getting data from server</li> <li>altering data in server</li> <li>adding styles to react apps</li> </ul> |
