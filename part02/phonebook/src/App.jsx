@@ -4,12 +4,22 @@ const Person = ({ person }) => {
   return <p>{person.name}</p>;
 };
 
+const checkDuplicate = (people, name) => {
+  return people.find((person) => person.name === name);
+};
+
 const App = () => {
   const [persons, setPersons] = useState([{ name: "Arto Hellas" }]);
   const [newName, setNewName] = useState("");
 
   const addName = (event) => {
     event.preventDefault();
+    const isDuplicate = checkDuplicate(persons, newName);
+    if (isDuplicate) {
+      alert(`${newName} is already added to phonebook`);
+      return;
+    }
+
     const personObject = { name: newName };
     setPersons(persons.concat(personObject));
   };
