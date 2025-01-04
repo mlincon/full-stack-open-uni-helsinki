@@ -38,12 +38,16 @@ const App = () => {
     const noteObject = {
       content: newNote,
       important: Math.random() < 0.5,
-      id: String(notes.length + 1),
+      // id: String(notes.length + 1), // json-server generates id automatically
     };
 
     // recall that concat does not mutate but creates a new copy of an array
     // this is important since we must never mutate state directly in React!
-    setNotes(notes.concat(noteObject));
+    axios.post("http://localhost:3001/notes", noteObject).then((response) => {
+      console.log(response);
+      setNotes(notes.concat(response.data))
+      setNewNote('')
+    });
   };
 
   const handleNoteChange = (event) => {
