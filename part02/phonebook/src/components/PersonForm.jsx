@@ -1,4 +1,5 @@
 import { useState } from "react";
+import crud from "../services/crude";
 
 const checkDuplicate = (people, name) => {
   return people.find((person) => person.name === name);
@@ -17,7 +18,9 @@ const PersonForm = ({ persons, setPersons }) => {
     }
 
     const personObject = { name: newName, number: newNumber };
-    setPersons(persons.concat(personObject));
+    crud.create(personObject).then((data) => {
+      setPersons(persons.concat(data));
+    });
   };
 
   const handleAddName = (event) => {

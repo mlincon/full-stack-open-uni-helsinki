@@ -4,19 +4,17 @@ import axios from "axios";
 import PersonForm from "./components/PersonForm";
 import Persons from "./components/Numbers";
 import Filter from "./components/Filter";
-
-
+import crud from "./services/crude";
 
 const App = () => {
   const [persons, setPersons] = useState([]);
   const [searchText, setSearchText] = useState("");
 
   useEffect(() => {
-    axios.get("http://localhost:3001/persons")
-    .then(response => {
-      setPersons(response.data)
-    })
-  }, [])
+    crud.get().then((data) => {
+      setPersons(data);
+    });
+  }, []);
 
   const peopleToShow = searchText
     ? persons.filter((person) =>
