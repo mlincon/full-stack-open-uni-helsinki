@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
 
 import PersonForm from "./components/PersonForm";
 import Persons from "./components/Numbers";
@@ -15,6 +14,12 @@ const App = () => {
       setPersons(data);
     });
   }, []);
+
+  const deletePerson = (id) => {
+    crud.get().then((data) => {
+      setPersons(data);
+    });
+  }
 
   const peopleToShow = searchText
     ? persons.filter((person) =>
