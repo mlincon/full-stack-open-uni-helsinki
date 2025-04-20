@@ -1,0 +1,4 @@
+GET http://127.0.0.1:3001/api/notes
+
+### - new request
+GET http://127.0.0.1:3001/api/notes/1

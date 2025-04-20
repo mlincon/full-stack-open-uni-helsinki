@@ -130,7 +130,8 @@
         "christian-kohler.path-intellisense",
         "ecmel.vscode-html-css",
         "sidthesloth.html5-boilerplate",
-        "EchoAPI.echoapi-for-vscode"
+        "EchoAPI.echoapi-for-vscode",
+        "humao.rest-client"
       ]
     }
   },
