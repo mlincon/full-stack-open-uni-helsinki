@@ -1,7 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-
-const app = express();
+const mongoose = require("mongoose");
 
 let notes = [
   {
@@ -21,6 +20,25 @@ let notes = [
   },
 ];
 
+// explicitly tell the driver to authenticate using the default admin database
+const url = "mongodb://admin:pass@localhost:27017/notes?authSource=admin";
+
+mongoose.set("strictQuery", false);
+
+mongoose
+  .connect(url)
+  .then(() => console.log("connected"))
+  .catch((e) => console.error("connection error", e.message));
+
+const noteSchema = new mongoose.Schema({
+  content: String,
+  important: Boolean,
+});
+
+const Note = mongoose.model("Note", noteSchema);
+
+const app = express();
+
 // json-parser middleware to render request.body properly
 app.use(express.json());
 
@@ -36,7 +54,9 @@ app.get("/", (request, response) => {
 });
 
 app.get("/api/notes", (request, response) => {
-  response.json(notes);
+  Note.find({}).then((notes) => {
+    response.json(notes);
+  });
 });
 
 app.get("/api/notes/:id", (request, response) => {
